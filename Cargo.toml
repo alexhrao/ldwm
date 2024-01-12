@@ -1,0 +1,15 @@
+[package]
+name = "ldwm"
+version = "0.1.0"
+authors = ["Alexander Rao <alexhrao@gmail.com>"]
+description = "An LDWM signature parsing and verifying library"
+repository = "https://github.com/alexhrao/ldwm"
+documentation = "https://github.com/alexhrao/ldwm"
+license = "Unlicense"
+keywords = ["ldwm"]
+categories = ["crypto"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
