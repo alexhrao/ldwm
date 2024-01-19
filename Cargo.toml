@@ -7,9 +7,32 @@ repository = "https://github.com/alexhrao/ldwm"
 documentation = "https://github.com/alexhrao/ldwm"
 license = "Unlicense"
 keywords = ["ldwm"]
-categories = ["crypto"]
+categories = ["cryptography"]
 edition = "2021"
+
+
+[lib]
+name = "ldwm"
+path = "src/lib.rs"
+
+[lints.clippy]
+
+[lints.rust]
+missing_docs = "warn"
+
+[features]
+default = ["verify"]
+verify = []
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+sha2 = { version = "0.10.8", default-features = false }
+
+[profile.release]
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+
+[dev-dependencies]
+hex = "0.4.3"
