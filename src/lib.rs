@@ -7,7 +7,7 @@ pub mod verify;
 pub const SHA256_LEN: usize = 32;
 
 /// Winternitz Parameter
-/// 
+///
 /// This represents how many bits per "word"
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(u8)]
@@ -56,17 +56,17 @@ impl From<u8> for Winternitz {
             2 => Winternitz::W2,
             4 => Winternitz::W4,
             8 => Winternitz::W8,
-            _ => panic!()
+            _ => panic!(),
         }
     }
 }
 /// LDWM Signature Parameters
-/// 
+///
 /// Note that this library assumes SHA256 (i.e., `n` = 32);
 /// future iterations may relax this constraint.
-/// 
+///
 /// For more information, see the [RFC].
-/// 
+///
 /// [RFC]: https://datatracker.ietf.org/doc/html/draft-mcgrew-hash-sigs-00
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct LdwmParams {
@@ -74,7 +74,7 @@ pub struct LdwmParams {
     pub w: Winternitz,
     /// The `m` parameter; this is how many bytes we should
     /// collect from the hash result.
-    /// 
+    ///
     /// For example, if `m = 20`, each hash from SHA256 produces
     /// 32 bytes, and we then take the left-most 20 bytes
     pub m: usize,

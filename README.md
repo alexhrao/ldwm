@@ -4,7 +4,7 @@ LDWM implementation in pure Rust. This library currently provides
 __verification__ support; eventually, signing support will also
 be added.
 
-Verification is `#no_std` compatible!
+Verification is `#no_std` compatible.
 
 ## Example
 
