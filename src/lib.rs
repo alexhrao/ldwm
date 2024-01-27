@@ -67,7 +67,7 @@ impl From<u8> for Winternitz {
 /// 
 /// For more information, see the [RFC].
 /// 
-/// [RFC]: https://www.rfc-editor.org/rfc/rfc8778.html
+/// [RFC]: https://datatracker.ietf.org/doc/html/draft-mcgrew-hash-sigs-00
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct LdwmParams {
     /// The Winternitz parameter

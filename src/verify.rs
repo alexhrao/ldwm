@@ -110,7 +110,7 @@ fn gen_mts_candidate<const N: usize>(h: usize, k: usize, node_num: usize, ots_re
 /// assert!(verify(&params, &sig, key, msg));
 /// ```
 /// 
-/// [RFC]: https://www.rfc-editor.org/rfc/rfc8778.html
+/// [RFC]: https://datatracker.ietf.org/doc/html/draft-mcgrew-hash-sigs-00
 pub fn verify(params: &LdwmParams, sig: &Signature, key: &[u8], msg: &[u8]) -> bool {
     let mut hasher = Sha256::new();
     Digest::update(&mut hasher, msg);
@@ -156,7 +156,7 @@ pub fn verify(params: &LdwmParams, sig: &Signature, key: &[u8], msg: &[u8]) -> b
 /// # }
 /// ```
 /// 
-/// [RFC]: https://www.rfc-editor.org/rfc/rfc8778.html
+/// [RFC]: https://datatracker.ietf.org/doc/html/draft-mcgrew-hash-sigs-00
 pub fn verify_from_hash(params: &LdwmParams, sig: &Signature, key: &[u8], msg_hash: &[u8]) -> bool {
     let ots_key: [u8; SHA256_LEN] = gen_ots_candidate(params.w, params.m, msg_hash, sig.ots);
     let mts_key: [u8; SHA256_LEN] = gen_mts_candidate(params.h, params.k, sig.node_num, &ots_key, sig.auth_path);

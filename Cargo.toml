@@ -1,6 +1,6 @@
 [package]
 name = "ldwm"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Alexander Rao <alexhrao@gmail.com>"]
 description = "An LDWM signature parsing and verifying library"
 repository = "https://github.com/alexhrao/ldwm"
