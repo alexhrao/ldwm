@@ -1,34 +1,8 @@
-use core::mem;
-
-use crate::{LdwmParams, Signature, Winternitz, SHA256_LEN};
+use crate::{checksum, coef, LdwmParams, Signature, Winternitz, SHA256_LEN};
 
 use sha2::{Digest, Sha256};
 
-fn coef<const N: usize>(i: usize, w: Winternitz, s: &[u8; N], ck: &[u8; 2]) -> u8 {
-    let w: usize = w.into();
-    let max: usize = Winternitz::W8.into();
-    let mask: u8 = (1 << w) - 1;
-    let shift = max - (w * (i % (max / w)) + w);
-    let idx = (i * w) / max;
-    if idx >= N {
-        mask & (ck[idx - N] >> shift)
-    } else {
-        mask & (s[(i * w) / max] >> shift)
-    }
-}
-
-fn checksum<const N: usize>(w: Winternitz, s: &[u8; N]) -> [u8; mem::size_of::<u16>()] {
-    let u: usize = N * 8 / usize::from(w);
-    let mask = (1 << usize::from(w)) - 1;
-    let ck = (0..u)
-        .map(|i| mask - coef(i, w, s, &[0u8; 2]) as u16)
-        .sum::<u16>();
-    let shift = ck.leading_zeros() - (ck.leading_zeros() % 4);
-
-    (ck << shift).to_be_bytes()
-}
-
-fn gen_ots_candidate<const N: usize>(
+pub(crate) fn gen_ots_candidate<const N: usize>(
     w: Winternitz,
     m: usize,
     msg_hash: &[u8],
@@ -96,7 +70,7 @@ fn gen_mts_candidate<const N: usize>(
 /// This only supports SHA256
 ///
 /// If you only have the hash of the message, see [`verify_from_hash`].
-/// 
+///
 /// This function hashes the message in "one shot"; it does not attempt
 /// to perform any kind of buffering. If you need any buffering, you
 /// can construct your own hash and use [`verify_from_hash`] instead.
